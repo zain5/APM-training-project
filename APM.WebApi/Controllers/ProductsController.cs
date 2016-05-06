@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Web.OData;
 
 namespace APM.WebApi.Controllers
 {
@@ -15,9 +16,10 @@ namespace APM.WebApi.Controllers
         private static ProductRepository repo = new ProductRepository();
 
         // GET: api/Products
-        public IEnumerable<Product> Get()
+        [EnableQuery()]
+        public IQueryable<Product> Get()
         {
-            return repo.Retrieve();
+            return repo.Retrieve().AsQueryable();
         }
 
         // GET: api/Products/search="GDN"
