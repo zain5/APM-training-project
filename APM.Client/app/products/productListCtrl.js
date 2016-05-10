@@ -12,11 +12,13 @@
 
         productResource.query(
             {
+                //$filter: "contains(ProductCode, 'GDN') and Price ge 5 and Price le 20",
                 $filter: "contains(ProductCode, 'GDN') and Price ge 5 and Price le 20",
                 $orderby: "Price"
             },
             function (data) {
-            vm.products = data;
-        });
+                vm.products = data;
+            }
+        );
     }
 }());
