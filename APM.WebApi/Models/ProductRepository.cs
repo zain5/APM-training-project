@@ -72,7 +72,7 @@ namespace APM.WebAPI.Models
 
             // Locate and replace the item
             var itemIndex = products.FindIndex(p => p.ProductId == product.ProductId);
-            if (itemIndex > 0)
+            if (itemIndex >= 0)
             {
                 products[itemIndex] = product;
             }

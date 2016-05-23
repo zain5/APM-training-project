@@ -22,27 +22,33 @@ namespace APM.WebApi.Controllers
             return repo.Retrieve().AsQueryable();
         }
 
-        // GET: api/Products/search="GDN"
-        public IEnumerable<Product> Get(string search)
-        {
-            var products = repo.Retrieve();
-            return products.Where(T => T.ProductCode.Contains(search));
-        }
-
         // GET: api/Products/5
-        public string Get(int id)
+        public Product Get(int id)
         {
-            return "value";
+            Product product;
+
+            if (id > 0)
+            {
+                product = repo.Retrieve().FirstOrDefault(T => T.ProductId == id);
+            }
+            else
+            {
+                product = repo.Create();
+            }
+
+            return product;
         }
 
         // POST: api/Products
-        public void Post([FromBody]string value)
+        public void Post([FromBody]Product product)
         {
+            var newProduct = repo.Save(product);
         }
 
         // PUT: api/Products/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody]Product product)
         {
+            var updatedProduct = repo.Save(id, product);
         }
 
         // DELETE: api/Products/5
